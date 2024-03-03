@@ -21,7 +21,7 @@ public class ProductRepository {
         productList = productDao.getProduct();
     }
 
-    public void insertStudent(Product product) {
+    public void insertProduct(Product product) {
         ProductDatabase.databaseWriteExecutor.execute(() -> productDao.insert(product));
     }
 
