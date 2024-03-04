@@ -1,11 +1,14 @@
 package com.example.commerceapp.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "product_table")
-public class Product {
+public class Product implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     Integer productId;
@@ -18,6 +21,29 @@ public class Product {
         this.stock = stock;
         this.price = price;
     }
+
+    protected Product(Parcel in) {
+        if (in.readByte() == 0) {
+            productId = null;
+        } else {
+            productId = in.readInt();
+        }
+        name = in.readString();
+        stock = in.readString();
+        price = in.readString();
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
 
     @NonNull
     public Integer getProductId() {
@@ -50,5 +76,23 @@ public class Product {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        if (productId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(productId);
+        }
+        dest.writeString(name);
+        dest.writeString(stock);
+        dest.writeString(price);
     }
 }

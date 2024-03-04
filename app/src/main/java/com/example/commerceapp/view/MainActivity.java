@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getAllProducts().observe(this, data -> {
             if (data != null) {
                 ProductAdapter adapter = new ProductAdapter((ArrayList<Product>) data);
+                adapter.context = this;
                 binding.rvProducts.setLayoutManager(new LinearLayoutManager(this));
                 binding.rvProducts.setAdapter(adapter);
             }

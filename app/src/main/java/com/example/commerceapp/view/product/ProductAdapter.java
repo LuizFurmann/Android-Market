@@ -1,5 +1,7 @@
 package com.example.commerceapp.view.product;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.StudentViewHolder> {
     ArrayList<Product> productArrayList;
+    public Context context;
 
     public ProductAdapter(ArrayList<Product> students) {
         this.productArrayList = students;
@@ -30,8 +33,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.StudentV
 
     @Override
     public void onBindViewHolder(@NonNull StudentViewHolder holder, int position) {
+        Product currentPosition = productArrayList.get(position);
 
-        holder.productName.setText(productArrayList.get(position).getName());
+        holder.productName.setText(currentPosition.getName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(context, ProductDetailsActivity.class);
+                myIntent.putExtra("Product", currentPosition);
+                context.startActivity(myIntent);
+            }
+        });
     }
 
     @Override
@@ -49,9 +63,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.StudentV
         }
 
         private void findViews() {
-
             productName = itemView.findViewById(R.id.tvProductName);
-
         }
     }
 }

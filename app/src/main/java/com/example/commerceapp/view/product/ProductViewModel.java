@@ -27,4 +27,14 @@ public class ProductViewModel extends AndroidViewModel {
     public void insertProduct(Product student) {
         productRepository.insertProduct(student);
     }
+
+    // below line is to update data in our repository.
+    public void update(Product student) {
+        productRepository.update(student);
+    }
+
+    // below line is to delete the data in our repository.
+    public void delete(Product student) {
+        productRepository.delete(student);
+    }
 }
