@@ -3,6 +3,7 @@ package com.example.commerceapp.view.product;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,6 +31,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.StudentV
     @Override
     public void onBindViewHolder(@NonNull StudentViewHolder holder, int position) {
 
+        holder.productName.setText(productArrayList.get(position).getName());
     }
 
     @Override
@@ -39,12 +41,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.StudentV
 
     static class StudentViewHolder extends RecyclerView.ViewHolder {
 
+        TextView productName;
+
         public StudentViewHolder(@NonNull View itemView) {
             super(itemView);
             findViews();
         }
 
         private void findViews() {
+
+            productName = itemView.findViewById(R.id.tvProductName);
+
         }
     }
 }

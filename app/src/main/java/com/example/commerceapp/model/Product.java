@@ -6,26 +6,25 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "product_table")
 public class Product {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
-    String productId;
+    Integer productId;
     String name;
     String stock;
     String price;
 
-    public Product(String productId, String name, String stock, String price){
-        this.productId = productId;
+    public Product(String name, String stock, String price){
         this.name = name;
         this.stock = stock;
         this.price = price;
     }
 
     @NonNull
-    public String getProductId() {
+    public Integer getProductId() {
         return productId;
     }
 
-    public void setProductId(@NonNull String productId) {
+    public void setProductId(@NonNull Integer productId) {
         this.productId = productId;
     }
 
